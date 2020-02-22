@@ -1,0 +1,3 @@
+graft cola_years/static
+graft cola_years/templates
+global-exclude *.pyc

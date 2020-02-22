@@ -1,0 +1,36 @@
+:root {
+  --primary: var(--teal);
+  --info: var(--blue);
+  --anchor: var(--teal);
+  --anchor-hover: var(--teal);
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  padding-top: 6rem;
+  max-width: 48rem;
+  margin: auto;
+}
+.starter-template {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--primary);
+  font-family: sans-serif;
+}
+.nav-header {
+  color: var(--dark);
+}
+.btn-group.special {
+  display: flex;
+}
+.special .btn {
+  flex: 1
+}
+
+a {
+  color: var(--teal);
+}
+a:hover {
+  color: var(--teal);
+}
