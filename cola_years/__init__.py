@@ -22,13 +22,19 @@ from flask import Flask, render_template, url_for
 
 # Functions ====================================================================
 
-def total_spent(per_day=300_000, cola_year=(1412 * 12)):
-    strike_start = '2020-02-10'
-    today = datetime.today().strftime('%Y-%m-%d')
-    holidays = 1
+def total_spent(
+    per_day: int = 300_000,
+    cola_year: int = (1412 * 12),
+    strike_start: str = '2020-02-10',
+    today: str = datetime.today().strftime('%Y-%m-%d'),
+    holidays: int = 1,
+):
     days = busday_count(strike_start, today) - holidays
     total = days * per_day
-    return f'{(total / 1e6):.1f}', str(int(total / cola_year))
+    millions = f'{(total / 1e6):.1f}'
+    cola_years = int(round(total / cola_year))
+    percent_grads = int(round(cola_years / 800 * 100))
+    return millions, cola_years, percent_grads
 
 
 def create_app(test_config=None):
@@ -65,7 +71,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    millions, cola_years = total_spent()
+    millions, cola_years, percent_grads = total_spent()
     
     @app.route('/')
     def index():
@@ -74,7 +80,8 @@ def create_app(test_config=None):
             nav_button="About",
             url=url_for('about'),
             millions=millions,
-            cola_years=cola_years
+            cola_years=cola_years,
+            percent_grads=percent_grads
         )
     
     @app.route('/about')
