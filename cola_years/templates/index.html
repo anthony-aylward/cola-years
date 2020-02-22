@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="starter-template">
-  <p class="lead">Hello world</p>
+  <p class="lead">The UC Santa Cruz administration has spent roughly</p>
+  <h1>${{ millions }} million</h1>
+  <p class="lead">
+    on hiring police to break the ongoing grad student strike. That is
+    equivalent to
+  </p>
+  <h2>{{ cola_years }} COLA-years</h2>
+  <p class="lead">
+    where a COLA-year is the cost of providing a COLA to one student for one
+    year. There are about 800 grad students at UCSC.
+  </p>
+  <br>
+  <a class="btn btn-outline-info btn-lg" href="https://payusmoreucsc.com">Support striking grads!</a>
 </div>
 {% endblock %}

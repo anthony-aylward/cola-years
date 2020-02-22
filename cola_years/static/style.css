@@ -2,7 +2,7 @@
   --primary: var(--cyan);
   --info: var(--blue);
   --anchor: var(--cyan);
-  --anchor-hover: var(--cyan);
+  --anchor-hover: var(--yellow);
 }
 html {
   scroll-behavior: smooth;
@@ -11,15 +11,19 @@ body {
   padding-top: 6rem;
   max-width: 48rem;
   margin: auto;
+  color: var(--light);
+  background-color: var(--dark);
 }
 nav {
-  color: var(--white); background: var(--primary); display: flex;
+  color: var(--light); background: var(--primary); display: flex;
   align-items: center; padding: 0 0.5rem;
 }
+a { color: var(--anchor); font-weight: bold; }
+a:hover { color: var(--anchor-hover); text-decoration: none;}
+
 .starter-template {
   padding: 2rem 1.5rem;
   text-align: center;
-  color: var(--dark);
   font-family: sans-serif;
 }
 .nav-header {
@@ -32,9 +36,9 @@ nav {
   flex: 1
 }
 
-a {
-  color: var(--cyan);
+.starter-template > h1 {
+  color: var(--yellow); padding-bottom: 10px;
 }
-a:hover {
-  color: var(--cyan);
+.starter-template > h2 {
+  color: var(--yellow); padding-bottom: 9px;
 }

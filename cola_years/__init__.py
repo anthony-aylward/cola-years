@@ -13,12 +13,23 @@ This file contains the application factory for the okscope app.
 # Imports ======================================================================
 
 import os
+from datetime import datetime
+from numpy import busday_count
 from flask import Flask, render_template, url_for
 
 
 
 
 # Functions ====================================================================
+
+def total_spent(per_day=300_000, cola_year=(1412 * 12)):
+    strike_start = '2020-02-10'
+    today = datetime.today().strftime('%Y-%m-%d')
+    holidays = 1
+    days = busday_count(strike_start, today) - holidays
+    total = days * per_day
+    return f'{(total / 1e6):.1f}', str(int(total / cola_year))
+
 
 def create_app(test_config=None):
     """The application factory function
@@ -53,10 +64,18 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    millions, cola_years = total_spent()
     
     @app.route('/')
     def index():
-        return render_template('index.html', nav_button="About", url=url_for('about'))
+        return render_template(
+            'index.html',
+            nav_button="About",
+            url=url_for('about'),
+            millions=millions,
+            cola_years=cola_years
+        )
     
     @app.route('/about')
     def about():
