@@ -28,13 +28,14 @@ def total_spent(
     strike_start: str = '2020-02-10',
     today: str = datetime.today().strftime('%Y-%m-%d'),
     holidays: int = 1,
+    total_grads: int = 1977
 ):
     days = busday_count(strike_start, today) - holidays
     total = days * per_day
     millions = f'{(total / 1e6):.1f}'
     cola_years = int(round(total / cola_year))
-    percent_grads = int(round(cola_years / 800 * 100))
-    return millions, cola_years, percent_grads
+    percent_grads = int(round(cola_years / total_grads * 100))
+    return millions, cola_years, total_grads, percent_grads
 
 
 def create_app(test_config=None):
@@ -71,7 +72,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    millions, cola_years, percent_grads = total_spent()
+    millions, cola_years, total_grads, percent_grads = total_spent()
     
     @app.route('/')
     def index():
@@ -81,6 +82,7 @@ def create_app(test_config=None):
             url=url_for('about'),
             millions=millions,
             cola_years=cola_years,
+            total_grads=total_grads,
             percent_grads=percent_grads
         )
     
