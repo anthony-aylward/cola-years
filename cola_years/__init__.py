@@ -71,11 +71,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    millions, cola_years, total_grads, percent_grads = total_spent()
     
     @app.route('/')
     def index():
+        millions, cola_years, total_grads, percent_grads = total_spent()
         return render_template(
             'index.html',
             nav_button="About",
