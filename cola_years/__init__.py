@@ -74,7 +74,9 @@ def create_app(test_config=None):
     
     @app.route('/')
     def index():
-        millions, cola_years, total_grads, percent_grads = total_spent()
+        millions, cola_years, total_grads, percent_grads = total_spent(
+            today=datetime.today().strftime('%Y-%m-%d')
+        )
         return render_template(
             'index.html',
             nav_button="About",
